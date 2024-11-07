@@ -1,0 +1,25 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+
+
+html {
+  font-size: 10px;
+  font-family: "Arial", sans-serif;
+}
+
+#app {
+  min-width: 320px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+@media (min-width: 1300px) {
+  html {
+    font-size: 12.5px;
+  }
+}
