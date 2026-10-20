@@ -3,15 +3,22 @@ import ToggleTheme from "./header/ToggleTheme.vue";
 import ToggleLanguage from "./header/ToggleLanguage.vue";
 import HamburgBotton from "./header/HamburgBotton.vue";
 
+import { useI18n } from "vue-i18n";
 import { useToggleStore } from "../stores/toggle";
 
+const { t } = useI18n();
 const toggle = useToggleStore();
 </script>
 
 <template>
-  <header class="header">
+  <header class="header" :class="{ 'header-light': !toggle.Theme }">
     <div class="header-logo">
-      <img src="../assets/img/logo1.png" alt="" />
+      <img
+        src="../assets/img/logo1.webp"
+        alt="Logo Elian Encarnacion"
+        width="400"
+        height="134"
+      />
     </div>
 
     <nav
@@ -23,11 +30,10 @@ const toggle = useToggleStore();
       }"
     >
       <div class="container-link">
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About me</RouterLink>
-        <RouterLink to="/projects">Projects</RouterLink>
-        <RouterLink to="/contact">Contact</RouterLink>
-        <div class="animation start-home"></div>
+        <RouterLink to="/">{{ t("nav.home") }}</RouterLink>
+        <RouterLink to="/about">{{ t("nav.about") }}</RouterLink>
+        <RouterLink to="/projects">{{ t("nav.projects") }}</RouterLink>
+        <RouterLink to="/contact">{{ t("nav.contact") }}</RouterLink>
       </div>
 
       <div class="toggle-container">
@@ -55,20 +61,31 @@ const toggle = useToggleStore();
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  min-height: 70px;
-  // position: fixed;
-  // background-color: $backgound-black;
-  // color: white;
+  min-height: 76px;
+  position: sticky;
+  top: 0;
+  padding: 14px $gutter;
+  background-color: rgba(7, 9, 15, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 0.3s, border-color 0.3s;
   z-index: 500;
+}
+.header-light {
+  background-color: rgba(255, 255, 255, 0.75);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
 }
 
 .header-logo {
-  margin: 0 10px;
-  width: 150px;
+  margin: 0;
+  display: flex;
+  align-items: center;
 }
 .header-logo img {
-  width: 100%;
-  height: auto;
+  height: 40px;
+  width: auto;
+  display: block;
 }
 .navigation {
   background-color: $backgound-black;
@@ -132,9 +149,30 @@ const toggle = useToggleStore();
   // background-color: $backgound-black;
   color: $primary-color;
   text-decoration: none;
-
+  position: relative;
   z-index: 1;
   padding: 20px;
+}
+
+/* Subrayado que sigue al enlace activo / hover (reemplaza la barra fija). */
+@media screen and (min-width: 800px) {
+  .navigation a::after {
+    content: "";
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 6px;
+    height: 3px;
+    border-radius: 8px;
+    background: $primary-color;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+  }
+  .navigation a.router-link-exact-active::after,
+  .navigation a:hover::after {
+    transform: scaleX(1);
+  }
 }
 
 .navigation a.router-link-exact-active:nth-child(1) ~ .animation {
@@ -170,8 +208,10 @@ const toggle = useToggleStore();
 
 @media screen and (min-width: 800px) {
   .header-logo {
-    margin-left: 20px;
-    width: 180px;
+    margin-left: 0;
+  }
+  .header-logo img {
+    height: 44px;
   }
   .navigation {
     background-color: initial;
@@ -194,6 +234,9 @@ const toggle = useToggleStore();
     display: flex;
     flex-direction: row;
     text-align: center;
+  }
+  .navigation a {
+    font-size: 1.6rem;
   }
   .toggle-container {
     position: initial;

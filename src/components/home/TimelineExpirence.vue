@@ -1,297 +1,160 @@
 <script setup>
-import { useToggleStore } from "@/stores/toggle";
-const toggle = useToggleStore();
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+
+const jobs = [
+  {
+    key: "job1",
+    date: "08/2024 — 10/2024",
+    company: "Global Creative Unit",
+    tags: ["Vue.js", "JavaScript", "Bootstrap"],
+  },
+  {
+    key: "job2",
+    date: "05/2023 — 11/2023",
+    company: "Marcos Organizador de Negocios",
+    tags: ["Odoo", "Python", "ERP"],
+  },
+  {
+    key: "job3",
+    date: "2021 — 2024",
+    company: "ITLA",
+    tags: ["Backend", "Frontend", "SQL"],
+  },
+];
 </script>
 
 <template>
-  <div class="h2-container"><h2>Experience</h2></div>
+  <div class="xp">
+    <p class="eyebrow">
+      <span class="eyebrow__num">01</span>
+      <span>{{ t("sections.experience") }}</span>
+      <span class="eyebrow__rule"></span>
+    </p>
+    <h2 class="section-h2">{{ t("sections.experience") }}</h2>
 
-  <div class="timeline">
-    <div class="timeline__card">
-      <div
-        :class="{ dark_card_icon: toggle.Theme }"
-        class="timeline__card_icon"
-      ></div>
-      <div
-        :class="{ dark_timeline_content: toggle.Theme }"
-        class="timeline__card_content"
-      >
-        <h3>Software Engineer (08/2024 - 10/2024)</h3>
-        <div>
-          <h4>Global Creative Unit</h4>
+    <div class="xp__list">
+      <div class="xp__row" v-for="job in jobs" :key="job.key">
+        <div class="xp__date">{{ job.date }}</div>
+        <div class="xp__body">
+          <div class="xp__head">
+            <h3 class="xp__role">{{ t(`experience.${job.key}.title`) }}</h3>
+            <span class="xp__company">· {{ job.company }}</span>
+          </div>
+          <p class="xp__desc">{{ t(`experience.${job.key}.desc`) }}</p>
+          <div class="xp__tags">
+            <span
+              class="xp__tag"
+              v-for="(tag, i) in job.tags"
+              :key="tag"
+              :class="{ 'xp__tag--brand': i === 0 }"
+              >{{ tag }}</span
+            >
+          </div>
         </div>
-
-        <p>
-          During my experience at Global Creative Unit, I implemented web
-          solutions using JavaScript, Vue.js and Bootstrap, creating efficient
-          and high quality applications. My work focused on developing intuitive
-          and dynamic user interfaces, improving the user experience and
-          ensuring optimal performance for the project.
-        </p>
-      </div>
-    </div>
-    <div class="timeline__card">
-      <div
-        :class="{ dark_card_icon: toggle.Theme }"
-        class="timeline__card_icon"
-      ></div>
-      <div
-        :class="{ dark_timeline_content: toggle.Theme }"
-        class="timeline__card_content"
-      >
-        <h3>Software Engineer (05/2023 - 11/2023)</h3>
-        <div>
-          <h4>Marcos Organizador de Negocios</h4>
-        </div>
-
-        <p>
-          I had the opportunity to work in organizational business frameworks,
-          where I was part of the development of new modules using Odoo and
-          Python. This experience allowed me to acquire new knowledge about
-          accounting systems and improve my skills in the design and
-          implementation of efficient solutions for business management.
-        </p>
-      </div>
-    </div>
-    <div class="timeline__card">
-      <div
-        :class="{ dark_card_icon: toggle.Theme }"
-        class="timeline__card_icon"
-      ></div>
-      <div
-        :class="{ dark_timeline_content: toggle.Theme }"
-        class="timeline__card_content"
-      >
-        <h3>Software Development (2021 - 2024)</h3>
-        <div>
-          <h4>Instituto Tecnológico de las Américas</h4>
-        </div>
-
-        <p>
-          While studying at ITLA, I carried out several internships and projects
-          that gave me experience in both backend and frontend development and
-          database management. This allowed me to strengthen my skills and gain
-          a comprehensive approach to software development.
-        </p>
       </div>
     </div>
   </div>
 </template>
+
 <style scoped lang="scss">
-.h2-container {
-  width: 80%;
-  padding: 0px 0 20px 0;
+.xp {
+  width: 100%;
+  margin: 0;
+  padding: 0 $gutter;
+  text-align: left;
 }
-h2 {
-  font-size: 4rem;
-}
-.timeline {
-  color: black;
+
+.eyebrow {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  h2 {
-    font-size: 3.2rem;
-  }
-  .timeline__card:nth-of-type(2) {
-    .timeline__card_icon {
-      background-image: url("@/assets/logosc/marcoson.png");
-    }
-  }
-
-  .timeline__card:nth-of-type(3) {
-    .timeline__card_icon {
-      background-image: url("@/assets/logosc/itlalogo.png");
-    }
-  }
-
-  .timeline__card:nth-of-type(4) {
-    .timeline__card_icon {
-      background-image: url("@/assets/logosc/itlalogo.png");
-    }
-  }
+  gap: 14px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.3rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: $primary-color;
+  margin: 0;
 }
-.timeline__card {
-  min-width: 260px;
-  width: 70%;
-  margin: 20px;
+.eyebrow__num {
+  color: #5c666b;
 }
-.timeline__card_icon {
-  background-image: url("@/assets/logosc/gcunit.jpg");
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 200px;
-  border-bottom: 1px solid $primary-color;
-  border-top: 1px solid $primary-color;
-  border-radius: 6px 6px 0 0;
+.eyebrow__rule {
+  flex: 1;
+  height: 1px;
+  background: $hairline;
 }
 
-.timeline__card_content {
-  font-size: 1.4rem;
-  padding: 20px;
-  box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
-    0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
-  background: #fff;
-  border-radius: 0 0 6px 6px;
+.section-h2 {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 3.4rem;
+  letter-spacing: -1px;
+  margin: 18px 0 40px;
 }
-.dark_timeline_content {
-  box-shadow: 0 30px 60px -12px rgba(255, 255, 255, 0.25),
-    0 18px 36px -18px rgba(255, 255, 255, 0.3),
-    0 -12px 36px -8px rgba(253, 253, 253, 0.025);
+
+.xp__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 28px 0;
+  border-top: 1px solid $hairline;
 }
-.timeline__card_content h3 {
-  padding-bottom: 5px;
+.xp__row:last-child {
+  border-bottom: 1px solid $hairline;
+}
+.xp__date {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.3rem;
   color: $primary-color;
 }
-.timeline__card_content h4 {
-  //   padding-bottom: 5px;
+.xp__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
 }
-.timeline__card_content p {
-  line-height: 1.5;
+.xp__role {
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 2rem;
+  margin: 0;
 }
-
-@media (max-width: 500px) {
-  .timeline__card {
-    width: 80%;
-  }
+.xp__company {
+  font-size: 1.4rem;
+  color: $muted;
 }
-@media (min-width: 600px) {
-  .timeline {
-    .timeline__card {
-      width: 80%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      &:nth-of-type(1) {
-        flex-direction: row-reverse;
-      }
-      &:nth-of-type(2) .timeline__card_icon {
-        &:before {
-          content: "";
-          width: 2px;
-          height: 120%;
-          background: $primary-color;
-          position: absolute;
-          top: 0%;
-          z-index: 1;
-          left: 50%;
-          transform: translateX(-50%);
-          animation: fillTop 1s forwards 2s ease-in-out;
-        }
-        &:after {
-          content: "";
-          width: 100%;
-          height: 2px;
-          background: $primary-color;
-          position: absolute;
-          left: 0%;
-          z-index: 1;
-          top: 50%;
-          transform: translateY(-50%);
-          animation: fillLeftOdd 1s forwards 1s ease-in-out;
-        }
-      }
-
-      &:nth-of-type(3) {
-        flex-direction: row-reverse;
-      }
-      &:nth-of-type(3) .timeline__card_icon {
-        &:before {
-          content: "";
-          width: 2px;
-          height: 0%;
-          background: $primary-color;
-          position: absolute;
-          top: 0%;
-          left: 50%;
-          right: auto;
-          z-index: 1;
-          transform: translateX(-50%);
-          animation: fillTop 1s forwards 1s ease-in-out;
-        }
-        &:after {
-          content: "";
-          width: 100%;
-          height: 2px;
-          background: $primary-color;
-          position: absolute;
-          right: 0;
-          z-index: 1;
-          top: 50%;
-          left: auto;
-          transform: translateY(-50%);
-          animation: fillLeft 1s forwards 1s ease-in-out;
-        }
-      }
-    }
-  }
-  .timeline__card_content {
-    z-index: 2;
-  }
-  .timeline__card_icon {
-    box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
-      0 18px 36px -18px rgba(0, 0, 0, 0.3),
-      0 -12px 36px -8px rgba(0, 0, 0, 0.025);
-    position: relative;
-    height: 50px;
-    padding: 50px;
-    border-radius: 50%;
-    margin: 0 20px;
-    border-bottom: none;
-    border-top: none;
-    &:before {
-      content: "";
-      width: 2px;
-      height: 120%;
-      background: $primary-color;
-      position: absolute;
-      top: 0%;
-      left: 50%;
-      right: auto;
-      z-index: 1;
-      transform: translateX(-50%);
-      animation: fillTop 1s forwards 1s ease-in-out;
-    }
-    &:after {
-      content: "";
-      width: 100%;
-      height: 2px;
-      background: $primary-color;
-      position: absolute;
-      right: 0;
-      z-index: 1;
-      top: 50%;
-      left: auto;
-      transform: translateY(-50%);
-      animation: fillLeft 1s forwards 1s ease-in-out;
-    }
-  }
-  .dark_card_icon {
-    box-shadow: 0 30px 60px -12px rgba(255, 255, 255, 0.25),
-      0 18px 36px -18px rgba(255, 255, 255, 0.3),
-      0 -12px 36px -8px rgba(255, 255, 255, 0.025);
-  }
-  .timeline__card_content {
-    border-radius: 6px 6px;
-  }
+.xp__desc {
+  font-size: 1.45rem;
+  line-height: 1.7;
+  color: $muted;
+  margin: 10px 0 14px;
+  max-width: 760px;
+}
+.xp__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.xp__tag {
+  font-size: 1.2rem;
+  background: rgba(233, 238, 240, 0.06);
+  color: #cdd6da;
+  padding: 5px 11px;
+  border-radius: 7px;
+}
+.xp__tag--brand {
+  background: rgba(47, 214, 196, 0.1);
+  color: $primary-color;
 }
 
-@keyframes fillLeft {
-  100% {
-    right: 100%;
+@media screen and (min-width: 760px) {
+  .section-h2 {
+    font-size: 4.2rem;
   }
-}
-
-@keyframes fillTop {
-  100% {
-    top: 100%;
-  }
-}
-
-@keyframes fillLeftOdd {
-  100% {
-    left: 100%;
+  .xp__row {
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
   }
 }
 </style>

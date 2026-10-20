@@ -1,3 +1,13 @@
 $backgound-black: #07090f;
 $backgound-white: #ffffff;
 $primary-color: #2fd6c4;
+// Teal más oscuro para texto sobre fondos claros (tarjetas blancas) — cumple WCAG AA.
+$primary-dark: #0f766e;
+
+// Editorial Nocturno — tokens de texto y líneas sobre fondo oscuro.
+$ink: #e9eef0; // texto principal
+$muted: #9aa6ab; // texto secundario
+$hairline: rgba(233, 238, 240, 0.08); // líneas divisorias sutiles
+
+// Margen lateral (gutter) consistente en todo el sitio.
+$gutter: clamp(20px, 5vw, 64px);

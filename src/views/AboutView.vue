@@ -1,12 +1,14 @@
 <script setup>
 import MainLayout from "@/Layouts/MainLayout.vue";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 </script>
 
 <template>
   <main-layout>
     <div class="section-work">
       <div class="work">
-        <h3>🛠️ WORK IN PROGRESS 🛠️</h3>
+        <h3>{{ t("wip") }}</h3>
       </div>
     </div>
   </main-layout>

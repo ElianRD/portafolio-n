@@ -1,6 +1,6 @@
 <script setup>
-import { useToggleStore } from "@/stores/toggle";
-const toggle = useToggleStore();
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 import { ref, reactive } from "vue";
 const formData = reactive({
   name: "",
@@ -33,25 +33,25 @@ const validateForm = () => {
   });
 
   if (!formData.name.trim()) {
-    errors.name = "Por favor ingrese su nombre";
+    errors.name = t("form.errName");
     isValid = false;
   }
 
   if (!formData.email.trim()) {
-    errors.email = "Por favor ingrese su email";
+    errors.email = t("form.errEmail");
     isValid = false;
   } else if (!validateEmail(formData.email)) {
-    errors.email = "Por favor ingrese un email válido";
+    errors.email = t("form.errEmailValid");
     isValid = false;
   }
 
   if (!formData.subject.trim()) {
-    errors.subject = "Por favor ingrese el asunto";
+    errors.subject = t("form.errSubject");
     isValid = false;
   }
 
   if (!formData.message.trim()) {
-    errors.message = "Por favor ingrese su mensaje";
+    errors.message = t("form.errMessage");
     isValid = false;
   }
 
@@ -91,11 +91,11 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div :class="{ 'dark-shadow': toggle.Theme }" class="container">
-    <h2>Formulario de Contacto</h2>
+  <div class="contact-form__card">
+    <h2 class="contact-form__heading">{{ t("form.title") }}</h2>
     <form @submit.prevent="handleSubmit">
       <div class="form-group">
-        <label for="name">Nombre:</label>
+        <label for="name">{{ t("form.name") }}</label>
         <input
           type="text"
           id="name"
@@ -108,7 +108,7 @@ const handleSubmit = async () => {
       </div>
 
       <div class="form-group">
-        <label for="email">Email:</label>
+        <label for="email">{{ t("form.email") }}</label>
         <input
           type="email"
           id="email"
@@ -121,7 +121,7 @@ const handleSubmit = async () => {
       </div>
 
       <div class="form-group">
-        <label for="subject">Asunto:</label>
+        <label for="subject">{{ t("form.subject") }}</label>
         <input
           type="text"
           id="subject"
@@ -134,7 +134,7 @@ const handleSubmit = async () => {
       </div>
 
       <div class="form-group">
-        <label for="message">Mensaje:</label>
+        <label for="message">{{ t("form.message") }}</label>
         <textarea
           id="message"
           v-model="formData.message"
@@ -146,108 +146,146 @@ const handleSubmit = async () => {
       </div>
 
       <button type="submit" :disabled="loading">
-        {{ loading ? "Enviando..." : "Enviar Mensaje" }}
+        {{ loading ? t("form.sending") : t("form.send") }}
       </button>
     </form>
 
     <div class="success-message" v-if="showSuccess">
-      ¡Mensaje enviado con éxito!
+      {{ t("form.success") }}
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.container {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.contact-form__card {
   width: 100%;
-  max-width: 600px;
-  margin: 20px auto;
-  font-size: 1.6rem;
-}
-.dark-shadow {
-  box-shadow: 0 0 5px 15px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $hairline;
+  border-radius: 16px;
+  padding: 30px;
 }
 
-h2 {
-  color: #333;
-  margin-bottom: 1.5rem;
-  text-align: center;
+.contact-form__heading {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 2.2rem;
+  letter-spacing: -0.5px;
+  margin: 0 0 22px;
+  color: inherit;
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 18px;
 }
 
 label {
   display: block;
-  margin-bottom: 0.5rem;
-  color: #555;
-  font-weight: bold;
+  margin-bottom: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $muted;
 }
 
 input,
 textarea {
   width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(233, 238, 240, 0.14);
+  border-radius: 10px;
+  color: $ink;
+  font-family: inherit;
   font-size: 1.5rem;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b747a;
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: #4caf50;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+  border-color: $primary-color;
+  box-shadow: 0 0 0 3px rgba(47, 214, 196, 0.15);
 }
 
 input.invalid,
 textarea.invalid {
-  border-color: #ff0000;
+  border-color: #ff6b6b;
 }
 
 textarea {
-  min-height: 120px;
+  min-height: 140px;
   resize: vertical;
 }
 
 button {
-  background-color: #4caf50;
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
   width: 100%;
-  font-size: 1.5rem;
-  transition: background-color 0.3s;
+  margin-top: 6px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: $primary-color;
+  color: $backgound-black;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: filter 0.25s, transform 0.1s;
 }
 
 button:hover:not(:disabled) {
-  background-color: #45a049;
+  filter: brightness(1.08);
 }
-
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
 button:disabled {
-  background-color: #cccccc;
+  opacity: 0.55;
   cursor: not-allowed;
 }
 
 .error {
-  color: #ff0000;
-  font-size: 1.3rem;
-  margin-top: 0.2rem;
+  color: #ff6b6b;
+  font-size: 1.25rem;
+  margin-top: 6px;
 }
 
 .success-message {
-  background-color: #4caf50;
-  color: white;
-  padding: 1rem;
-  border-radius: 4px;
-  margin-top: 1rem;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(47, 214, 196, 0.12);
+  border: 1px solid rgba(47, 214, 196, 0.4);
+  color: $primary-color;
+  font-weight: 600;
   text-align: center;
+}
+
+/* Modo claro: los tokens base ($ink, bordes claros) son para fondo oscuro. */
+.app-shell:not(.dark) .contact-form__card {
+  background: #ffffff;
+  border-color: rgba(7, 9, 15, 0.1);
+  box-shadow: 0 12px 34px rgba(7, 9, 15, 0.07);
+}
+.app-shell:not(.dark) label {
+  color: #52606d;
+}
+.app-shell:not(.dark) input,
+.app-shell:not(.dark) textarea {
+  background: #f7f9fa;
+  border-color: rgba(7, 9, 15, 0.14);
+  color: $backgound-black;
+}
+.app-shell:not(.dark) input::placeholder,
+.app-shell:not(.dark) textarea::placeholder {
+  color: #9aa6ab;
+}
+.app-shell:not(.dark) .success-message {
+  color: $primary-dark;
 }
 </style>

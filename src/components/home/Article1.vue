@@ -1,32 +1,43 @@
+<script setup>
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+</script>
+
 <template>
   <article class="article1 home-text">
     <div class="presentacion home-text-content">
-      <h1>Hi<span class="mano">👋</span>, I am</h1>
-      <h1>Elian Encarnacion</h1>
-      <div class="wave-container">
-        <h2 class="border">Software Development</h2>
-        <h2 class="wave">Software Development</h2>
-      </div>
-      <p>
-        I am a passionate and highly motivated software developer. My focus is
-        on creating innovative and efficient solutions. I combine technical
-        skills with strong communication and collaboration abilities to achieve
-        exceptional results. I am a proactive individual, an excellent team
-        player, organized, and responsible.
-      </p>
+      <p class="eyebrow"><span class="eyebrow__line"></span>{{ t("hero.eyebrow") }}</p>
+      <h1 class="name">Elian<br />Encarnación</h1>
+      <p class="bio">{{ t("hero.bioShort") }}</p>
+
       <div class="btn-cv">
-        <a download="Elian cv" href="./ElianCV (1).pdf"
-          ><span><i class="bx bxs-file-pdf"></i></span>Check Resume</a
-        >
-        <a href=""
-          ><span><i class="bx bx-phone-call"></i></span> Contact Me</a
-        >
+        <a class="btn btn--primary" download="Elian-CV" href="/ElianCV.pdf">
+          <i class="bx bxs-file-pdf"></i>{{ t("hero.resume") }}
+        </a>
+        <RouterLink class="btn btn--ghost" to="/contact">
+          {{ t("hero.contact") }}<i class="bx bx-phone-call"></i>
+        </RouterLink>
       </div>
-    </div>
-    <div class="redes">
-      <a href=""><i class="bx bxl-linkedin-square"></i></a>
-      <a href=""><i class="bx bxl-gmail"></i></a>
-      <a href=""><i class="bx bxl-github"></i></a>
+
+      <div class="redes">
+        <a
+          href="https://www.linkedin.com/in/elian-encarnacionb268/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          ><i class="bx bxl-linkedin-square"></i
+        ></a>
+        <a href="mailto:elianencarnacion03@gmail.com" aria-label="Enviar correo"
+          ><i class="bx bxl-gmail"></i
+        ></a>
+        <a
+          href="https://github.com/ElianRD"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          ><i class="bx bxl-github"></i
+        ></a>
+      </div>
     </div>
   </article>
 </template>
@@ -39,259 +50,246 @@
   padding-bottom: 50px;
 }
 .home-text-content {
-  width: 90%;
-  margin: 40px auto;
-  text-align: center;
-}
-.home-text-content h1 {
-  font-size: 3rem;
-}
-.mano {
-  display: inline-block;
-  transform-origin: 70% 70%;
-  animation: moveAndBack 2s linear infinite;
-}
-.home-text-content h2 {
-  font-size: 2.2rem;
-  line-height: 3rem;
-  /* color: #1abc9c; */
-  position: absolute;
-}
-.wave-container {
   width: 100%;
-}
-.border {
-  // color: rgb(0, 0, 0);
-  text-shadow: -0.5px -0.5px 0 rgb(255, 255, 255), 0.5px -0.5px 0 white,
-    0.5px 0.5px 0 #1abc9c, 0.5px 0.5px 0 #1abc9c;
-}
-.wave {
-  color: #1abc9c;
-  animation: wave 2s ease-in-out infinite;
-}
-.home-text-content p {
-  margin-top: 40px;
-  font-size: 1.6rem;
-  padding: 10px 0;
-}
-
-.btn-cv a {
-  position: relative;
-  display: inline-block;
-  width: 240px;
+  margin: 40px 0;
   text-align: center;
+}
 
-  border: 2px solid #1abc9c;
-  padding: 10px 10px;
-
-  border-radius: 10px;
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  font-size: 1.3rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: $primary-color;
+  margin-bottom: 22px;
+}
+.eyebrow__line {
+  width: 34px;
+  height: 1px;
   background: $primary-color;
-  color: $backgound-black;
-  font-size: 2.5rem;
-  text-decoration: none;
-  font-weight: 700;
-  z-index: 1;
-  transition: 0.9s;
+  display: inline-block;
+}
+
+.name {
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+  font-size: 5.2rem;
+  line-height: 0.98;
+  letter-spacing: -1.5px;
+  color: inherit;
+  margin: 0;
+}
+
+.bio {
+  max-width: 460px;
+  margin: 26px auto 0;
+  font-size: 1.6rem;
+  line-height: 1.7;
+  color: $muted;
+}
+
+.btn-cv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 36px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
   overflow: hidden;
-  margin: 0 auto;
-  margin-top: 10px;
+  z-index: 1;
+  padding: 14px 26px;
+  border-radius: 12px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.4s;
 }
-.btn-cv a:hover {
-  color: $primary-color;
+.btn i {
+  font-size: 2rem;
 }
-.btn-cv a:nth-child(2) {
-  color: $primary-color;
-  background-color: $backgound-black;
-}
-
-.btn-cv a:nth-child(2):hover {
-  color: $backgound-black;
-}
-
-.btn-cv a::before {
-  position: absolute;
+.btn::before {
   content: "";
+  position: absolute;
   top: 0;
   left: 0;
   width: 0;
   height: 100%;
-  background: $backgound-black;
   z-index: -1;
-  transition: 0.5s;
+  transition: width 0.5s;
 }
-.btn-cv a:nth-child(2)::before {
-  background-color: $primary-color;
-}
-.btn-cv a:hover::before {
+.btn:hover::before {
   width: 100%;
 }
-
-/* iconos de las redes sociales */
+.btn--primary {
+  background: $primary-color;
+  color: $backgound-black;
+  /* Borde teal: mantiene la forma del botón visible cuando el relleno oscuro
+     coincide con el fondo de la página en modo oscuro (espejo del ghost). */
+  border: 1px solid $primary-color;
+}
+/* Mismo relleno deslizante que el ghost, con los colores invertidos:
+   el ghost se llena de teal (texto oscuro); el primario se llena de oscuro
+   (texto teal). */
+.btn--primary::before {
+  background: $backgound-black;
+}
+.btn--primary:hover {
+  color: $primary-color;
+}
+/* En modo claro el relleno es claro (como el fondo) con texto teal legible:
+   el botón queda "hueco" con texto y borde teal. */
+.app-shell:not(.dark) .btn--primary::before {
+  background: $backgound-white;
+}
+.app-shell:not(.dark) .btn--primary:hover {
+  color: $primary-dark;
+}
+.btn--ghost {
+  border: 1px solid rgba(233, 238, 240, 0.18);
+  color: $ink;
+  font-weight: 600;
+}
+.btn--ghost i {
+  color: $primary-color;
+}
+.btn--ghost::before {
+  background: $primary-color;
+}
+.btn--ghost:hover {
+  color: $backgound-black;
+}
+.btn--ghost:hover i {
+  color: $backgound-black;
+}
 
 .redes {
   display: flex;
-  justify-content: space-between;
-  left: 40px;
-  bottom: 20px;
-  width: 200px;
-  margin: auto;
+  justify-content: center;
+  gap: 14px;
+  margin: 40px auto 0;
 }
 .redes a {
   position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  text-decoration: none;
-  width: 50px;
-  height: 50px;
-  color: #1abc9c;
-  font-size: 35px;
-  border: 2px solid #1abc9c;
+  width: 44px;
+  height: 44px;
+  color: $muted;
+  font-size: 2.2rem;
+  border: 1px solid rgba(233, 238, 240, 0.14);
   border-radius: 50%;
-  transition: all 0.5s;
-  z-index: 1;
+  text-decoration: none;
   overflow: hidden;
-}
-.redes a:hover {
-  border: 2px solid #0a66c2;
-  color: #0a66c2;
-}
-.redes a:nth-child(2):hover {
-  color: rgb(255, 0, 0);
-  border: 2px solid rgb(255, 0, 0);
-}
-.redes a:nth-child(3):hover {
-  color: black;
-  border: 2px solid black;
+  z-index: 1;
+  transition: color 0.4s, border-color 0.4s;
 }
 .redes a::before {
-  position: absolute;
   content: "";
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: #ffffff;
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  transform: translateY(100%);
+  transition: transform 0.4s;
   z-index: -1;
-  transition: 0.5s;
 }
-.redes a:hover:before {
-  width: 100%;
+.redes a:hover::before {
+  transform: translateY(0);
 }
-
-@keyframes moveAndBack {
-  0%,
-  100% {
-    transform: translateX(0) rotate(-10deg);
-  }
-  50% {
-    transform: translateX(0) rotate(45deg);
-  }
+.redes a:nth-child(1):hover {
+  color: #0a66c2;
+  border-color: #0a66c2;
 }
-@keyframes wave {
-  0%,
-  100% {
-    clip-path: polygon(
-      0% 47%,
-      10% 48%,
-      33% 54%,
-      54% 60%,
-      70% 61%,
-      84% 59%,
-      100% 52%,
-      100% 100%,
-      0% 100%
-    );
-  }
-
-  50% {
-    clip-path: polygon(
-      0% 60%,
-      15% 65%,
-      34% 66%,
-      51% 62%,
-      67% 50%,
-      84% 45%,
-      100% 46%,
-      100% 100%,
-      0% 100%
-    );
-  }
+.redes a:nth-child(2):hover {
+  color: #ea4335;
+  border-color: #ea4335;
+}
+.redes a:nth-child(3):hover {
+  color: #111;
+  border-color: #fff;
 }
 
-@media screen and (min-width: 400px) {
-  .home-text-content h1 {
-    font-size: 4rem;
-  }
-  .home-text-content h2 {
-    font-size: 3.2rem;
-    line-height: 4rem;
-    /* color: #1abc9c; */
-    position: absolute;
-  }
+/* Modo claro: mejorar contraste del botón ghost y los íconos sociales
+   (los tokens $ink/$muted y los bordes casi-blancos son solo para fondo oscuro). */
+.app-shell:not(.dark) .btn--ghost {
+  color: $backgound-black;
+  border-color: rgba(7, 9, 15, 0.22);
 }
-@media screen and (min-width: 760px) {
-  .btn-cv a:nth-child(2) {
-    margin-left: 20px;
-  }
-
-  .home-text-content h1 {
-    font-size: 4rem;
-  }
-  .home-text-content h2 {
-    font-size: 3.2rem;
-    line-height: 4rem;
-    position: absolute;
-  }
+.app-shell:not(.dark) .btn--ghost i {
+  color: $primary-dark;
+}
+.app-shell:not(.dark) .redes a {
+  color: #52606d;
+  border-color: rgba(7, 9, 15, 0.18);
+}
+/* Modo claro: el relleno blanco es invisible sobre fondo blanco, así que no se
+   notaba el hover. Se rellena con el color de cada marca y el ícono va en blanco. */
+.app-shell:not(.dark) .redes a:hover {
+  color: #fff;
+}
+.app-shell:not(.dark) .redes a:nth-child(1)::before {
+  background: #0a66c2;
+}
+.app-shell:not(.dark) .redes a:nth-child(2)::before {
+  background: #ea4335;
+}
+.app-shell:not(.dark) .redes a:nth-child(3)::before {
+  background: #111;
+}
+.app-shell:not(.dark) .redes a:nth-child(1):hover {
+  border-color: #0a66c2;
+}
+.app-shell:not(.dark) .redes a:nth-child(2):hover {
+  border-color: #ea4335;
+}
+.app-shell:not(.dark) .redes a:nth-child(3):hover {
+  border-color: #111;
 }
 
 @media screen and (min-width: 800px) {
-  .btn-cv a:nth-child(2) {
-    margin-left: 0px;
-  }
   .home-text-content {
     text-align: start;
   }
-  .home-text-content h1 {
-    font-size: 4rem;
+  .eyebrow {
+    justify-content: flex-start;
   }
-
+  .name {
+    font-size: 6.4rem;
+  }
+  .bio {
+    margin-left: 0;
+  }
+  .btn-cv {
+    justify-content: flex-start;
+  }
   .redes {
-    margin: 0px;
-    margin-left: 30px;
+    justify-content: flex-start;
+    margin-left: 0;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .home-text-content h1 {
-    font-size: 5rem;
+  .name {
+    font-size: 7.5rem;
   }
-  .home-text-content p {
-    margin-top: 40px;
-    font-size: 2rem;
-    padding: 10px 0;
-  }
-
-  .btn-cv a {
-    width: initial;
-  }
-  .btn-cv a:nth-child(2) {
-    margin-left: 20px;
+  .bio {
+    font-size: 1.7rem;
   }
 }
 
-@media screen and (min-width: 1300px){
-  .redes {
-
-  width: 250px;
-
+@media (prefers-reduced-motion: reduce) {
+  .btn::before,
+  .redes a::before {
+    transition: none;
+  }
 }
-  .redes a {
-    font-size: 45px;
-  width: 70px;
-  height: 70px;
-
-}
-}
-
 </style>

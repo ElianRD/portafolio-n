@@ -2,7 +2,8 @@ import { ref, watch } from "vue";
 import { defineStore } from "pinia";
 
 export const useToggleStore = defineStore("toggle", () => {
-  const Theme = ref(JSON.parse(localStorage.getItem("Theme")) || false);
+  const savedTheme = JSON.parse(localStorage.getItem("Theme"));
+  const Theme = ref(savedTheme === null ? true : savedTheme);
   const Languaje = ref(JSON.parse(localStorage.getItem("Languaje")) || false);
   const HamburgueBotton = ref(false);
 

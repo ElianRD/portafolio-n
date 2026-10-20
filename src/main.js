@@ -1,14 +1,15 @@
-// import "./assets/main.css";
-// import "./sass/main.scss";
+import "boxicons/css/boxicons.min.css";
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 
 import App from "./App.vue";
 import router from "./router";
-import "boxicons";
+import i18n from "./i18n";
+
 const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
+app.use(i18n);
 
 app.mount("#app");
