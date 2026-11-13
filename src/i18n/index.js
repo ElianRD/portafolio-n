@@ -85,6 +85,19 @@ const messages = {
       availability: "Abierto a nuevas oportunidades",
       socialLabel: "Sígueme",
     },
+    aboutPage: {
+      title: "Sobre mí",
+      p1: "Soy Elian Encarnación, desarrollador de software full-stack formado en el ITLA. Me apasiona construir interfaces y sistemas web eficientes, con foco en soluciones limpias, medibles y bien comunicadas.",
+      p2: "Trabajo principalmente con Vue, React y Python, y me gusta involucrarme en todo el ciclo: del diseño de la interfaz a la lógica de negocio y las bases de datos. Soy proactivo, organizado y buen compañero de equipo.",
+      focusTitle: "En qué me enfoco",
+      focus1: "Frontend moderno con Vue y React",
+      focus2: "APIs y backend con Python y NestJS",
+      focus3: "Módulos de negocio con Odoo y SQL",
+    },
+    projectsPage: {
+      title: "Proyectos",
+      note: "Una selección de trabajos y experimentos. Pasa el cursor sobre cada tarjeta para ver la demo y el repositorio.",
+    },
     projectsSection: {
       heading: "Trabajo seleccionado",
       note: "Desliza para ver los proyectos.",
@@ -187,6 +200,19 @@ const messages = {
       availabilityLabel: "Availability",
       availability: "Open to new opportunities",
       socialLabel: "Follow me",
+    },
+    aboutPage: {
+      title: "About me",
+      p1: "I'm Elian Encarnación, a full-stack software developer trained at ITLA. I'm passionate about building efficient web interfaces and systems, focused on clean, measurable and well-communicated solutions.",
+      p2: "I mainly work with Vue, React and Python, and I like being involved across the whole cycle: from UI design to business logic and databases. I'm proactive, organized and a good team player.",
+      focusTitle: "What I focus on",
+      focus1: "Modern frontend with Vue and React",
+      focus2: "APIs and backend with Python and NestJS",
+      focus3: "Business modules with Odoo and SQL",
+    },
+    projectsPage: {
+      title: "Projects",
+      note: "A selection of work and experiments. Hover each card to see the demo and the repository.",
     },
     projectsSection: {
       heading: "Selected work",

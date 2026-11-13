@@ -60,18 +60,10 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
+import { baseProjects } from "@/data/projects";
 
 const { t } = useI18n();
 const modules = [EffectCoverflow, Pagination];
-
-// TODO: reemplazar por proyectos reales (image: import local, title, tags, demo, repo).
-const baseProjects = [
-  { title: "Proyecto — [nombre]", tags: "Vue · API REST", demo: "#", repo: "#" },
-  { title: "Proyecto — [nombre]", tags: "Python · NestJS", demo: "#", repo: "#" },
-  { title: "Proyecto — [nombre]", tags: "Vue · SQL", demo: "#", repo: "#" },
-  { title: "Proyecto — [nombre]", tags: "React · .NET", demo: "#", repo: "#" },
-  { title: "Proyecto — [nombre]", tags: "Odoo · Python", demo: "#", repo: "#" },
-];
 
 // Las etiquetas se incorporan a los datos (closure del v-for) porque dentro de
 // <swiper-slide> el scope del setup (t) no es accesible directamente.
