@@ -4,7 +4,10 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
-export default defineConfig({
+// base: en producción (build) el sitio vive bajo /portafolio-n/ (GitHub Pages,
+// project site). En desarrollo se sirve desde la raíz.
+export default defineConfig(({ command }) => ({
+  base: command === "build" ? "/portafolio-n/" : "/",
   plugins: [vue()],
   resolve: {
     alias: {
@@ -19,4 +22,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

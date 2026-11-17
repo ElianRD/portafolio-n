@@ -1,6 +1,10 @@
 <script setup>
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+
+// El CV vive en /public; se antepone BASE_URL para que funcione bajo el
+// subpath de GitHub Pages (/portafolio-n/) y en la raíz en desarrollo.
+const cvUrl = import.meta.env.BASE_URL + "ElianCV.pdf";
 </script>
 
 <template>
@@ -11,7 +15,7 @@ const { t } = useI18n();
       <p class="bio">{{ t("hero.bioShort") }}</p>
 
       <div class="btn-cv">
-        <a class="btn btn--primary" download="Elian-CV" href="/ElianCV.pdf">
+        <a class="btn btn--primary" download="Elian-CV" :href="cvUrl">
           <i class="bx bxs-file-pdf"></i>{{ t("hero.resume") }}
         </a>
         <RouterLink class="btn btn--ghost" to="/contact">
